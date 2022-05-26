@@ -6,8 +6,12 @@ import { HeaderComponent } from '../share/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InstagramComponent } from './instagram/instagram.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from '@angular/material/card';
 
-
+const MATERIAL_MODULE = [MatFormFieldModule, MatCardModule];
+const FORM_MODULE = [ReactiveFormsModule, FormsModule];
 @NgModule({
     declarations: [
         HeaderComponent,
@@ -17,13 +21,17 @@ import { InstagramComponent } from './instagram/instagram.component';
     imports: [
         CommonModule,
         ShareRoutingModule,
-        CarouselModule
+        ReactiveFormsModule,
+        FORM_MODULE,
+        MATERIAL_MODULE,
     ],
     exports: [
         HeaderComponent,
         FooterComponent,
         CarouselModule,
-        InstagramComponent
+        InstagramComponent,
+        FORM_MODULE,
+        MATERIAL_MODULE
     ]
 })
 export class ShareModule { }

@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+    avatar!: String;
+    defaultAvatar: String = '../../../assets/img/default_avatar.png';
+    username!: String;
 
-  ngOnInit(): void {
-  }
+    constructor(private userService: UserService, private globalService: GlobalService) {
+        this.globalService.setUsername(this.userService.getUser());
+        this.globalService.setAvatar('../../../assets/img/default_avatar.png');
+    }
+
+    ngOnInit(): void {
+        this.globalService.username.subscribe(username => {
+            this.username = username;
+        });
+        this.globalService.avatar.subscribe(avatar => {
+            this.avatar = avatar;
+        });
+    }
 
 }

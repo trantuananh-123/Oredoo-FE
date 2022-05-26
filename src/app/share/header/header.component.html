@@ -167,17 +167,7 @@
             </div>
 
             <!--header-right-->
-            <div class="header-right ">
-                <!--theme-switch-->
-                <div class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <span class="slider round ">
-                            <i class="lar la-sun icon-light"></i>
-                            <i class="lar la-moon icon-dark"></i>
-                        </span>
-                    </label>
-                </div>
+            <div class="header-right">
 
                 <!--search-icon-->
                 <div class="search-icon">
@@ -185,9 +175,20 @@
                 </div>
 
                 <!--button-subscribe-->
-                <div class="botton-sub">
+                <!-- <div class="botton-sub">
                     <a href="signup.html" class="btn-subscribe">subscribe</a>
-                </div>
+                </div> -->
+
+                <mat-card *ngIf="username" class="avatar-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="avatar" [ngStyle]="{'background-image': 'url(' + avatar + ')'}">
+                        </div>
+                    </mat-card-header>
+                </mat-card>
+
+                <span *ngIf="username" style="margin-left: 10px; color: #000000">Tuấn Anh</span>
+                <a routerLink="/login" *ngIf="!username"
+                    style="font-size: 16px; margin-left: 10px; color: #000000; font-weight: bold">Login</a>
 
                 <!--navbar-toggler-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"
