@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
     username!: String;
 
     constructor(private userService: UserService, private globalService: GlobalService) {
-        this.globalService.setUsername(this.userService.getUser());
+        this.globalService.setUsername(this.userService.getUserName());
         this.globalService.setAvatar('../../../assets/img/default_avatar.png');
     }
 

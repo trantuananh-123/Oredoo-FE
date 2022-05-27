@@ -18,8 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (token != null) {
             authReq = req.clone({
                 setHeaders: {
-                    'Authorization': 'Bearer' + `${token}`,
-                    'Content-Type': 'application/json'
+                    'Authorization': 'Bearer ' + `${token}`
                 }
             });
         }
@@ -44,6 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     handleAuthError() {
         this.userService.signOut();
+        this.toastr.warning('Please login again to continue', 'Timeout');
         this.router.navigateByUrl('/login');
     }
 }

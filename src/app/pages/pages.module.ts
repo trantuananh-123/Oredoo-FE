@@ -14,6 +14,7 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { SearchComponent } from './search/search.component';
 import { MyPostComponent } from './my-post/my-post.component';
+import { HtmlPipe } from '../pipe/html-pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MyPostComponent } from './my-post/my-post.component';
         BlogComponent,
         BlogDetailComponent,
         SearchComponent,
-        MyPostComponent
+        MyPostComponent,
+        HtmlPipe
     ],
     imports: [
         CommonModule,

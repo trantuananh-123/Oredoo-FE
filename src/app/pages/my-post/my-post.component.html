@@ -2,6 +2,11 @@
 <section class="authors">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <h1>MY POST</h1>
+            </div>
+        </div>
+        <div class="row">
             <!--author-image-->
             <div class="col-lg-12 col-md-12 ">
                 <div class="authors-info">
@@ -50,6 +55,69 @@
                 </div>
                 <!--/-->
             </div>
+            <!--create-post-->
+            <div class="col-lg-12 col-md-12">
+                <h1 style="margin-top: 10px; font-weight: bold;">Share your stories</h1>
+                <div class="create-post">
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="panelOpenState === true" (opened)="setState(true)">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Create a new post
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <form [formGroup]="postForm" action="#" class="sign-form widget-form " method="post">
+                                <div class="form-group">
+                                    <label for="title" style="font-weight: bold;">Post's title <span
+                                            style="color: red;">*</span></label>
+                                    <input formControlName="title" type="text" maxlength="1000" class="form-control"
+                                        name="title"
+                                        [ngClass]="{'invalid': (form.title.touched || form.title.dirty || isSubmitted) && form.title.errors}">
+                                    <div *ngIf="(form.title.touched || form.title.dirty || isSubmitted)">
+                                        <mat-error class="custom__mat-error text-left"
+                                            *ngIf="form.title.errors?.required">
+                                            Title is required</mat-error>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" style="font-weight: bold;">Post's description <span
+                                            style="color: red;">*</span></label>
+                                    <input formControlName="description" type="text" maxlength="1000"
+                                        class="form-control" name="description"
+                                        [ngClass]="{'invalid': (form.description.touched || form.description.dirty || isSubmitted) && form.description.errors}">
+                                    <div *ngIf="(form.description.touched || form.description.dirty || isSubmitted)">
+                                        <mat-error class="custom__mat-error text-left"
+                                            *ngIf="form.description.errors?.required">
+                                            Description is required</mat-error>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" style="font-weight: bold;">Post's cover image <span
+                                            style="color: red;">*</span></label>
+                                    <input style="display: block;" type="file" name="image"
+                                        (change)="selectFile($event)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" style="font-weight: bold;">Post's content <span
+                                            style="color: red;">*</span></label>
+                                    <angular-editor formControlName="content" [config]="editorConfig"
+                                        [placeholder]="'Enter text here...'">
+                                    </angular-editor>
+                                    <div *ngIf="(form.content.touched || form.content.dirty || isSubmitted)">
+                                        <mat-error class="custom__mat-error text-left"
+                                            *ngIf="form.content.errors?.required">
+                                            Content is required</mat-error>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3 text-right" (click)="post()">
+                                    <button type="submit" class="btn-custom">Post</button>
+                                </div>
+                            </form>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <!--/-->
+            </div>
         </div>
     </div>
 </section>
@@ -58,14 +126,17 @@
 <section class="blog-author mt-30">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <h1 style="font-weight: bold;">My post</h1>
+            </div>
             <!--content-->
             <div class="col-lg-12 oredoo-content">
                 <div class="theiaStickySidebar">
                     <!--post1-->
-                    <div class="post-list post-list-style4 pt-0">
+                    <div *ngFor="let p of postList" class="post-list post-list-style4 pt-0">
                         <div class="post-list-image">
                             <a href="post-single.html">
-                                <img src="assets/img/blog/24.jpg" alt="">
+                                <img src="{{ p.image }}" alt="">
                             </a>
                         </div>
                         <div class="post-list-content">
@@ -73,11 +144,11 @@
                                 <li class="entry-cat">
                                     <a href="blog-layout-1.html" class="category-style-1">Branding</a>
                                 </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
+                                <li class="post-date"> <span class="line"></span> {{ p.createdDate | date:'dd-MM-yyyy'}}
+                                </li>
                             </ul>
                             <h5 class="entry-title">
-                                <a href="post-single.html">Brand is just a perception, and perception will match
-                                    reality</a>
+                                <a href="post-single.html">{{ p.description }}</a>
                             </h5>
                             <div class="post-btn">
                                 <a href="post-single.html" class="btn-read-more">Continue Reading <i
@@ -86,177 +157,6 @@
                         </div>
                     </div>
 
-                    <!--post2-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/23.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">marketing</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Ignoring online marketing is like opening a business but not
-                                    telling anyone</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post3-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/32.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">livestyle</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Your genetics load the gun your lifestyle pulls the
-                                    trigger.</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post4-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/25.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">design</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Everything is designed. Few things are designed well.</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post5-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/17.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">food</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Food is symbolic of love when words are inadequate</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post6-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/27.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">interior</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">A room is not a room without natural light</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post7-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/28.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">interior</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Being identifiably ‘something’ will help you stand out from
-                                    the crowd.</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--post8-->
-                    <div class="post-list post-list-style4">
-                        <div class="post-list-image">
-                            <a href="post-single.html">
-                                <img src="assets/img/blog/29.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="post-list-content">
-                            <ul class="entry-meta">
-                                <li class="entry-cat">
-                                    <a href="blog-layout-1.html" class="category-style-1">branding</a>
-                                </li>
-                                <li class="post-date"> <span class="line"></span> february 10 ,2022</li>
-                            </ul>
-                            <h5 class="entry-title">
-                                <a href="post-single.html">Top 7 secret interior design tips from the experts</a>
-                            </h5>
-                            <div class="post-btn">
-                                <a href="post-single.html" class="btn-read-more">Continue Reading <i
-                                        class="las la-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/-->
                     <!--pagination-->
                     <div class="pagination">
                         <div class="pagination-area text-left">

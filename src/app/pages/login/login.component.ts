@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this.authService.login(body).subscribe((data: any) => {
                 this.tokenService.saveToken(data.data.token);
-                this.userService.saveUser(data.data.username);
+                this.userService.saveUserName(data.data.username);
+                this.userService.saveUserId(data.data.id);
                 this.toastr.success('Login successfully', 'Success');
                 setTimeout(() => {
                     this.globalService.setUsername(data.data.username);
