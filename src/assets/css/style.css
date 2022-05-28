@@ -1313,7 +1313,7 @@ ul {
 
 .header-navbar .navbar .nav-item .nav-link.active:before,
 .header-navbar .navbar .nav-item .nav-link:hover:before {
-    height: 1px;
+    height: 0px;
 }
 
 .header-navbar .navbar .nav-item:last-child .nav-link {
@@ -2235,8 +2235,8 @@ input:checked+.slider:before {
 
 .post-list .entry-meta .post-author-img img {
     border-radius: 50%;
-    width        : 40px;
-    height       : 40px;
+    width        : 100px;
+    height       : 100px;
     margin-right : 10px;
 }
 

@@ -9,7 +9,7 @@ export class UserService {
 
     constructor() { }
 
-    signOut(): void {
+    logOut(): void {
         window.sessionStorage.clear();
     }
 

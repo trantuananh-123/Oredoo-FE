@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     loginForm!: FormGroup;
 
-    constructor(private authService: AuthService, private tokenService: TokenStorageService, private userService: UserService, private globalService: GlobalService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) { }
+    constructor(private authService: AuthService, private tokenService: TokenStorageService, private userService: UserService, private globalService: GlobalService, private fb: FormBuilder, private router: Router, private toastr: ToastrService, private spinner: SpinnerService) { }
 
     ngOnInit(): void {
         this.initForm();
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        this.spinner.show();
         this.isSubmitted = true;
         const body = this.setBodyRequest();
         if (this.loginForm.valid) {
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
                     this.globalService.setUsername(data.data.username);
                     this.globalService.setAvatar(data.data.avatar ? data.data.avatar : '../../../assets/img/default_avatar.png');
                     this.router.navigateByUrl('/home');
+                    this.spinner.hide();
                 }, 1000);
             }, (error: any) => {
                 this.toastr.error(error.error.message, 'Error');

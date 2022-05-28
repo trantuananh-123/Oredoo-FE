@@ -6,11 +6,12 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { GlobalService } from '../services/global.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private tokenService: TokenStorageService, private router: Router, private userService: UserService, private toastr: ToastrService) { }
+    constructor(private globalService: GlobalService, private tokenService: TokenStorageService, private router: Router, private userService: UserService, private toastr: ToastrService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authReq = req;
@@ -42,8 +43,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     handleAuthError() {
-        this.userService.signOut();
-        this.toastr.warning('Please login again to continue', 'Timeout');
+        this.userService.logOut();
+        this.toastr.warning('Please login to continue', 'Warning');
+        this.globalService.setUsername('');
+        this.globalService.setAvatar('');
         this.router.navigateByUrl('/login');
     }
 }
