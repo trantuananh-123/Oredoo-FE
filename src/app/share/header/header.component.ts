@@ -18,19 +18,21 @@ export class HeaderComponent implements OnInit {
 
     constructor(private userService: UserService, private authService: AuthService, private globalService: GlobalService, private router: Router) {
         this.globalService.setUsername(this.userService.getUserName());
-        this.globalService.setAvatar('../../../assets/img/default_avatar.png');
+        this.globalService.setIsAdmin(this.authService.isAdmin());
+        this.authService.getById(this.userService.getUserId()).subscribe((data: any) => {
+            this.globalService.avatar.next(data.data.avatar);
+        });
     }
 
     ngOnInit(): void {
         this.globalService.username.subscribe(username => {
             this.username = username;
         });
-        this.globalService.avatar.subscribe(avatar => {
-            this.avatar = avatar;
-        });
         this.globalService.isAdmin.subscribe(isAdmin => {
             this.isAdmin = isAdmin;
             console.log(isAdmin);
+        }); this.globalService.avatar.subscribe(avatar => {
+            this.avatar = avatar;
         });
     }
 

@@ -68,23 +68,10 @@
                     <!--post-single-bottom-->
                     <div class="post-single-bottom">
                         <div class="tags">
-                            <p>Tags:</p>
+                            <p style="margin: 0 !important; align-self: center">Tags:</p>
                             <ul class="list-inline">
-                                <li>
-                                    <a href="blog-layout-2.html">brading</a>
-                                </li>
-                                <li>
-                                    <a href="blog-layout-2.html">marketing</a>
-                                </li>
-                                <li>
-                                    <a href="blog-layout-3.html">tips</a>
-                                </li>
-                                <li>
-                                    <a href="blog-layout-4.html">design</a>
-                                </li>
-                                <li>
-                                    <a href="blog-layout-5.html">business
-                                    </a>
+                                <li *ngFor="let tag of post.tags">
+                                    <a href="#">{{ tag.name }}</a>
                                 </li>
                             </ul>
                         </div>

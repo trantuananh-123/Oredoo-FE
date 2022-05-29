@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { PostService } from 'src/app/services/post.service';
@@ -19,12 +20,9 @@ export class BlogDetailComponent implements OnInit {
     post!: any;
     categoryName!: any;
 
-    constructor(private postService: PostService, private spinner: SpinnerService, private activatedRoute: ActivatedRoute, private globalService: GlobalService, private categoryService: CategoryService) {
+    constructor(private postService: PostService, private authService: AuthService, private spinner: SpinnerService, private activatedRoute: ActivatedRoute, private globalService: GlobalService, private categoryService: CategoryService) {
         this.postId = this.activatedRoute.snapshot.params['id'];
         this.getPost();
-        this.globalService.avatar.subscribe(avatar => {
-            this.avatar = avatar;
-        });
     }
 
     ngOnInit(): void {
@@ -37,6 +35,9 @@ export class BlogDetailComponent implements OnInit {
     getPost() {
         this.postService.getById(this.postId).subscribe((data: any) => {
             this.post = data.data;
+            this.authService.getById(data.data.userId).subscribe((data: any) => {
+                this.avatar = data.data.avatar;
+            });
             const body = {
                 "id": data.data.categoryId
             }

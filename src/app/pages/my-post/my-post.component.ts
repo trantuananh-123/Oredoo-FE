@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { PostService } from 'src/app/services/post.service';
@@ -57,7 +58,7 @@ export class MyPostComponent implements OnInit {
         toolbarPosition: 'top',
     }
 
-    constructor(private postService: PostService, private categoryService: CategoryService, private tagService: TagService, private fileSerivce: FileService, private fb: FormBuilder, private userService: UserService, private toastr: ToastrService, private el: ElementRef, private spinner: SpinnerService) {
+    constructor(private postService: PostService, private categoryService: CategoryService, private tagService: TagService, private authService: AuthService, private fileSerivce: FileService, private fb: FormBuilder, private userService: UserService, private toastr: ToastrService, private el: ElementRef, private spinner: SpinnerService) {
     }
 
     ngOnInit(): void {

@@ -19,8 +19,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 
-const MATERIAL_MODULE = [MatFormFieldModule, MatCardModule, MatExpansionModule, MatTabsModule, MatProgressSpinnerModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatInputModule];
+const MATERIAL_MODULE = [MatFormFieldModule, MatCardModule, MatExpansionModule, MatTabsModule, MatProgressSpinnerModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatInputModule, MatTableModule, MatIconModule, MatButtonModule, MatChipsModule, MatDialogModule];
 const FORM_MODULE = [ReactiveFormsModule, FormsModule];
 const THIRD_MODULE = [AngularEditorModule, NgSelectModule, NgxPaginationModule];
 @NgModule({

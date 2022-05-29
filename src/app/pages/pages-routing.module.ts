@@ -58,15 +58,6 @@ const routes: Routes = [
     {
         path: 'search',
         component: SearchComponent
-    },
-    {
-        path: '404',
-        component: NotFoundComponent
-    },
-    {
-        path: '**',
-        redirectTo: '404',
-        pathMatch: 'full'
     }
 ];
 

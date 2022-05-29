@@ -36,4 +36,8 @@ export class AuthService {
             return true;
         } else return false;
     }
+
+    getAllAuthors() {
+        return this.http.get(`${environment.BASE_URL}/user/all-authors`);
+    }
 }

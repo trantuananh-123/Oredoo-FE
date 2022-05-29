@@ -17,4 +17,12 @@ export class CategoryService {
     getById(body: any): Observable<any> {
         return this.http.post(`${environment.BASE_URL}/post_category/get-by-id`, body);
     }
+
+    save(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/post_category/save`, body);
+    }
+
+    delete(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/post_category/delete`, body);
+    }
 }

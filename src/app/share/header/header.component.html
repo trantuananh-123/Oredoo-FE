@@ -1,5 +1,5 @@
 <!-- Header -->
-<header class="header navbar-expand-lg fixed-top ">
+<header class="header navbar-expand-lg fixed-top" style="z-index: 999;">
     <div class="container-fluid ">
         <div class="header-area ">
             <!--logo-->
@@ -38,13 +38,16 @@
                                 <a class="nav-link" routerLink="/contact-us"> contact us </a>
                             </li>
                             <li class="nav-item dropdown" *ngIf="isAdmin">
-                                <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown"> Admin </a>
+                                <a class="nav-link  dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
+                                    Admin </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li>
-                                        <a class="dropdown-item " href="shop.html">blog management </a>
+                                        <a class="dropdown-item " routerLink="admin/post-management">post management
+                                        </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item " href="shop.html">blog category management </a>
+                                        <a class="dropdown-item " routerLink="admin/post-cate-management">post category
+                                            management </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="shop-single.html">author management </a>
