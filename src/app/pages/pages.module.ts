@@ -15,6 +15,7 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { SearchComponent } from './search/search.component';
 import { MyPostComponent } from './my-post/my-post.component';
 import { HtmlPipe } from '../pipe/html-pipe';
+import { TruncatePipe } from '../pipe/truncate-pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HtmlPipe } from '../pipe/html-pipe';
         BlogDetailComponent,
         SearchComponent,
         MyPostComponent,
-        HtmlPipe
+        HtmlPipe,
+        TruncatePipe
     ],
     imports: [
         CommonModule,

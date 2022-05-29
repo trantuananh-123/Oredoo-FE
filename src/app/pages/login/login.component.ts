@@ -52,10 +52,12 @@ export class LoginComponent implements OnInit {
                 this.tokenService.saveToken(data.data.token);
                 this.userService.saveUserName(data.data.username);
                 this.userService.saveUserId(data.data.id);
+                this.userService.saveUserRole(data.data.roles);
                 this.toastr.success('Login successfully', 'Success');
                 setTimeout(() => {
                     this.globalService.setUsername(data.data.username);
                     this.globalService.setAvatar(data.data.avatar ? data.data.avatar : '../../../assets/img/default_avatar.png');
+                    this.globalService.setIsAdmin(this.authService.isAdmin());
                     this.router.navigateByUrl('/home');
                     this.spinner.hide();
                 }, 1000);

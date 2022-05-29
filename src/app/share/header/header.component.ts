@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,8 +14,9 @@ export class HeaderComponent implements OnInit {
     avatar!: String;
     defaultAvatar: String = '../../../assets/img/default_avatar.png';
     username!: String;
+    isAdmin: boolean = false;
 
-    constructor(private userService: UserService, private globalService: GlobalService) {
+    constructor(private userService: UserService, private authService: AuthService, private globalService: GlobalService, private router: Router) {
         this.globalService.setUsername(this.userService.getUserName());
         this.globalService.setAvatar('../../../assets/img/default_avatar.png');
     }
@@ -25,11 +28,18 @@ export class HeaderComponent implements OnInit {
         this.globalService.avatar.subscribe(avatar => {
             this.avatar = avatar;
         });
+        this.globalService.isAdmin.subscribe(isAdmin => {
+            this.isAdmin = isAdmin;
+            console.log(isAdmin);
+        });
     }
 
     logOut() {
         this.userService.logOut();
-        window.location.reload();
+        if (this.router.url.includes('/home')) {
+            window.location.reload();
+        }
+        this.router.navigateByUrl('/');
     }
 
 }

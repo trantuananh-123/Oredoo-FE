@@ -29,4 +29,8 @@ export class PostService {
     save(body: any): Observable<any> {
         return this.http.post(`${environment.BASE_URL}/post/save`, body);
     }
+
+    search(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/post/search`, body);
+    }
 }

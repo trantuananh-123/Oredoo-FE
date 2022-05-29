@@ -16,9 +16,11 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
-
-const MATERIAL_MODULE = [MatFormFieldModule, MatCardModule, MatExpansionModule, MatTabsModule, MatProgressSpinnerModule, MatMenuModule];
+const MATERIAL_MODULE = [MatFormFieldModule, MatCardModule, MatExpansionModule, MatTabsModule, MatProgressSpinnerModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatInputModule];
 const FORM_MODULE = [ReactiveFormsModule, FormsModule];
 const THIRD_MODULE = [AngularEditorModule, NgSelectModule, NgxPaginationModule];
 @NgModule({

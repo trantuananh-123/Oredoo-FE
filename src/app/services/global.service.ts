@@ -8,6 +8,7 @@ export class GlobalService {
 
     username = new BehaviorSubject<any>("");
     avatar = new BehaviorSubject<any>("");
+    isAdmin = new BehaviorSubject<any>(false);
 
     constructor() { }
 
@@ -17,5 +18,9 @@ export class GlobalService {
 
     setAvatar(avatar: String) {
         this.avatar.next(avatar);
+    }
+
+    setIsAdmin(isAdmin: boolean) {
+        this.isAdmin.next(isAdmin);
     }
 }

@@ -71,7 +71,7 @@
                                     <label for="title" style="font-weight: bold;">Post's title <span
                                             style="color: red;">*</span></label>
                                     <input formControlName="title" type="text" maxlength="1000" class="form-control"
-                                        name="title"
+                                        name="title" placeholder="Enter post's title"
                                         [ngClass]="{'invalid': (form.title.touched || form.title.dirty || isSubmitted) && form.title.errors}">
                                     <div *ngIf="(form.title.touched || form.title.dirty || isSubmitted)">
                                         <mat-error class="custom__mat-error text-left"
@@ -83,7 +83,7 @@
                                     <label for="title" style="font-weight: bold;">Post's description <span
                                             style="color: red;">*</span></label>
                                     <input formControlName="description" type="text" maxlength="1000"
-                                        class="form-control" name="description"
+                                        class="form-control" name="description" placeholder="Enter post's description"
                                         [ngClass]="{'invalid': (form.description.touched || form.description.dirty || isSubmitted) && form.description.errors}">
                                     <div *ngIf="(form.description.touched || form.description.dirty || isSubmitted)">
                                         <mat-error class="custom__mat-error text-left"
@@ -103,7 +103,7 @@
                                             <label for="category" style="font-weight: bold;">Post's category <span
                                                     style="color: red;">*</span></label>
                                             <ng-select formControlName="categoryId" [searchable]="true"
-                                                placeholder="Select category">
+                                                placeholder="Select category" [appendTo]="'body'">
                                                 <ng-option *ngFor="let cat of categoryList" [value]="cat.id">{{ cat.name
                                                     }}
                                                 </ng-option>
@@ -114,7 +114,7 @@
                                                     style="color: red;">(Maximum 5 tags)</span></label>
                                             <ng-select #ngSelect formControlName="tags" placeholder="Select tags"
                                                 [multiple]="true" [maxSelectedItems]="5" addTagText="Other"
-                                                [addTag]="newTag">
+                                                [addTag]="newTag" [appendTo]="'body'">
                                                 <ng-option *ngFor="let tag of tagList" [value]="tag.id">{{ tag.name
                                                     }}
                                                 </ng-option>
@@ -134,8 +134,8 @@
                                             Content is required</mat-error>
                                     </div>
                                 </div>
-                                <div class="form-group mt-3 text-right" (click)="post()">
-                                    <button type="submit" class="btn-custom">Post</button>
+                                <div class="form-group mt-3 text-right">
+                                    <button type="submit" class="btn-custom" (click)="post()">Post</button>
                                 </div>
                             </form>
                         </mat-expansion-panel>

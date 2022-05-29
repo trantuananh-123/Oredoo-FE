@@ -24,6 +24,10 @@
                                     about us </a>
                             </li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link  dropdown-toggle" routerLink="/authors" data-toggle="dropdown">
+                                    authors</a>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a class="nav-link  dropdown-toggle" routerLink="/blog" data-toggle="dropdown"> blogs
                                 </a>
                             </li>
@@ -33,7 +37,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" routerLink="/contact-us"> contact us </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown" *ngIf="isAdmin">
                                 <a class="nav-link  dropdown-toggle " href="#" data-toggle="dropdown"> Admin </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li>
@@ -62,11 +66,6 @@
 
             <!--header-right-->
             <div class="header-right">
-
-                <!--search-icon-->
-                <div class="search-icon" routerLink="/search">
-                    <i class="las la-search"></i>
-                </div>
 
                 <mat-card [matMenuTriggerFor]="menu" *ngIf="username" class="avatar-card" style="cursor: pointer;">
                     <mat-card-header>

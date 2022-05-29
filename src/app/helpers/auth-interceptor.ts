@@ -45,8 +45,6 @@ export class AuthInterceptor implements HttpInterceptor {
     handleAuthError() {
         this.userService.logOut();
         this.toastr.warning('Please login to continue', 'Warning');
-        this.globalService.setUsername('');
-        this.globalService.setAvatar('');
         this.router.navigateByUrl('/login');
     }
 }

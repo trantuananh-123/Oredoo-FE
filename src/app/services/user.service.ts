@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
+import { GlobalService } from './global.service';
 
 const USER_NAME_KEY = 'user_name';
 const USER_ID_KEY = 'user_id';
+const USER_ROLE_KEY = 'user_role';
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    constructor() { }
+    constructor(private globalService: GlobalService) { }
 
     logOut(): void {
+        this.globalService.setUsername('');
+        this.globalService.setAvatar('');
+        this.globalService.setIsAdmin(false);
         window.sessionStorage.clear();
     }
 
@@ -29,6 +34,11 @@ export class UserService {
     saveUserId(userId: any) {
         window.sessionStorage.removeItem(USER_ID_KEY);
         window.sessionStorage.setItem(USER_ID_KEY, userId);
+    }
+
+    saveUserRole(userRole: any) {
+        window.sessionStorage.removeItem(USER_ROLE_KEY);
+        window.sessionStorage.setItem(USER_ROLE_KEY, userRole);
     }
 
     getUserId() {

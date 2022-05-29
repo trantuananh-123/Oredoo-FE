@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="small-post-content">
                                         <p>
-                                            <a href="post-single.html">{{ p.description }}</a>
+                                            <a href="post-single.html">{{ p.description | truncate }}</a>
                                         </p>
                                         <small> <span class="slash"></span>{{ p.createdDate | date:'dd-MM-yyyy'
                                             }}</small>

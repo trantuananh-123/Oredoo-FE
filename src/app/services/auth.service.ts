@@ -21,4 +21,19 @@ export class AuthService {
     isLoggedIn(): boolean {
         return sessionStorage.getItem('token') != null;
     }
+
+    getById(id: String): Observable<any> {
+        return this.http.get(`${environment.BASE_URL}/user/${id}`);
+    }
+
+    checkAdmin(id: String) {
+        return this.http.get(`${environment.BASE_URL}/user/check-admin/${id}`);
+    }
+
+    isAdmin() {
+        let userRoles = sessionStorage.getItem('user_role')!;
+        if (userRoles != null && userRoles.includes('ROLE_ADMIN')) {
+            return true;
+        } else return false;
+    }
 }

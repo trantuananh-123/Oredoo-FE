@@ -8,6 +8,7 @@ import { ShareModule } from './share/share.module';
 import { HttpClientModule } from '@angular/common/http';
 import { authProvider } from './helpers/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
             positionClass: 'toast-right-center',
         })
     ],
-    providers: [authProvider],
+    providers: [authProvider, AuthGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,7 +6,7 @@
                 <div class="col-lg-10">
                     <div class="section-heading-5-title">
                         <h1>Find your favourite blog</h1>
-                        <p class="links"><a href="index.html">Home <i class="las la-angle-right"></i></a> Blog</p>
+                        <p class="links"><a routerLink="/">Home <i class="las la-angle-right"></i></a> Blog</p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi mollitia, adipisci odio iusto
                             aperiam ea et
                             obcaecati! Nulla similique est possimus rerum. Tempora quas sint ex, doloremque quis
@@ -18,10 +18,126 @@
     </div>
 </div>
 
+<!--search-field-->
+<div>
+    <div class="container-fluid">
+        <div class="section-heading-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading-5-title">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Search
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <form [formGroup]="searchForm" action="#" class="sign-form widget-form " method="post">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label for="title" style="font-weight: bold;">Author's name</label>
+                                                <input formControlName="authorName" type="text" maxlength="1000"
+                                                    class="form-control" name="author"
+                                                    placeholder="Enter author's name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label for="category" style="font-weight: bold;">Post's category</label>
+                                                <ng-select formControlName="categoryId" placeholder="Select category"
+                                                    [appendTo]="'body'">
+                                                    <ng-option *ngFor="let cat of categoryList" [value]="cat.id">{{
+                                                        cat.name
+                                                        }}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label for="tag" style="font-weight: bold;">Post's tags</label>
+                                                <ng-select #ngSelect formControlName="tags" placeholder="Select tags"
+                                                    [multiple]="true" [maxSelectedItems]="5" [appendTo]="'body'">
+                                                    <ng-option *ngFor="let tag of tagList" [value]="tag.id">{{ tag.name
+                                                        }}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tag" style="font-weight: bold;">From date</label>
+                                                        <mat-form-field appearance="fill" style="display: block;">
+                                                            <mat-label>Choose a date</mat-label>
+                                                            <input matInput [matDatepicker]="picker1"
+                                                                formControlName="startDate">
+                                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                                            <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                            </mat-datepicker-toggle>
+                                                            <mat-datepicker #picker1></mat-datepicker>
+                                                        </mat-form-field>
+                                                        <div
+                                                            *ngIf="(form.startDate.touched || form.startDate.dirty || isSubmitted)">
+                                                            <mat-error class="custom__mat-error text-left"
+                                                                *ngIf="searchForm.hasError('fromToDate')">
+                                                                Start date must smaller than End date</mat-error>
+                                                            <mat-error class="custom__mat-error text-left"
+                                                                *ngIf="searchForm.hasError('startDate')">
+                                                                Start date must smaller than Current date</mat-error>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tag" style="font-weight: bold;">End date</label>
+                                                        <mat-form-field appearance="fill" style="display: block;">
+                                                            <mat-label>Choose a date</mat-label>
+                                                            <input matInput [matDatepicker]="picker2"
+                                                                formControlName="endDate">
+                                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                                            <mat-datepicker-toggle matSuffix [for]="picker2">
+                                                            </mat-datepicker-toggle>
+                                                            <mat-datepicker #picker2></mat-datepicker>
+                                                        </mat-form-field>
+                                                        <div
+                                                            *ngIf="(form.endDate.touched || form.endDate.dirty || isSubmitted)">
+                                                            <mat-error class="custom__mat-error text-left"
+                                                                *ngIf="searchForm.hasError('fromToDate')">
+                                                                End date must not smaller than Start date</mat-error>
+                                                            <mat-error class="custom__mat-error text-left"
+                                                                *ngIf="searchForm.hasError('endDate')">
+                                                                End date must smaller than Current date</mat-error>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3 text-right">
+                                        <button type="submit" class="btn-custom" (click)="search()">Search</button>
+                                    </div>
+                                </form>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
 
 <!-- blog-layout-5-->
 <section class="blog-layout-5">
     <div class="container-fluid">
+        <h1 style="font-size: 32px; font-weight: bold">Post list({{ postList.length }})</h1>
         <div class="row">
             <!--conetnt-->
             <div class="col-lg-8 oredoo-content">
@@ -55,147 +171,6 @@
                     </pagination-controls>
                 </div>
             </div>
-
-            <!--sidebar-->
-            <div class="col-lg-4 oredoo-sidebar">
-                <div class="theiaStickySidebar">
-                    <div class="sidebar">
-                        <!--search-->
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5>Search</h5>
-                            </div>
-                            <div class=" widget-search">
-                                <form action="https://assiagroupe.site/html/Oredoo/search.html">
-                                    <input type="search" id="gsearch" name="gsearch" placeholder="Search ....">
-                                    <a href="search.html" class="btn-submit"><i class="las la-search"></i></a>
-                                </form>
-                            </div>
-                        </div>
-
-                        <!--categories-->
-                        <div class="widget ">
-                            <div class="widget-title">
-                                <h5>Categories</h5>
-                            </div>
-                            <div class="widget-categories">
-                                <a class="category-item" href="#" *ngFor="let cat of categoryList">
-                                    <div class="image">
-                                        <img src="assets/img/categories/1.jpg" alt="">
-                                    </div>
-                                    <p>{{ cat.name }}</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--newslatter-->
-                        <div class="widget widget-newsletter">
-                            <h5>Subscribe To Our Newsletter</h5>
-                            <p>No spam, notifications only about new products, updates.</p>
-                            <form action="#" class="newslettre-form">
-                                <div class="form-flex">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Your Email Adress"
-                                            required="required">
-                                    </div>
-                                    <button class="btn-custom" type="submit">Subscribe now</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!--stay connected-->
-                        <div class="widget ">
-                            <div class="widget-title">
-                                <h5>Stay connected</h5>
-                            </div>
-
-                            <div class="widget-stay-connected">
-                                <div class="list">
-                                    <div class="item color-facebook">
-                                        <a href="#"><i class="fab fa-facebook"></i></a>
-                                        <p>Facebook 12k</p>
-                                    </div>
-
-                                    <div class="item color-instagram">
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                        <p>instagram 102k</p>
-                                    </div>
-
-                                    <div class="item color-twitter">
-                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                        <p>twitter 22k</p>
-                                    </div>
-
-                                    <div class="item color-youtube">
-                                        <a href="#"><i class="fab fa-youtube"></i></a>
-                                        <p>Youtube 120k</p>
-                                    </div>
-
-                                    <div class="item color-dribbble">
-                                        <a href="#"><i class="fab fa-dribbble"></i></a>
-                                        <p>dribbble 17k</p>
-                                    </div>
-
-                                    <div class="item color-pinterest">
-                                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                                        <p>pinterest 10k</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Tags-->
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5>Tags</h5>
-                            </div>
-                            <div class="tags">
-                                <ul class="list-inline">
-                                    <li *ngFor="let t of tagList">
-                                        <a href="#">{{ t.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!--popular-posts-->
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5>popular Posts</h5>
-                            </div>
-
-                            <ul class="widget-popular-posts">
-                                <!--post1-->
-                                <li class="small-post" *ngFor="let p of topPostList; let i = index">
-                                    <div class="small-post-image">
-                                        <a href="post-single.html">
-                                            <img src="{{ p.image }}" alt="">
-                                            <small class="nb">{{ i + 1 }}</small>
-                                        </a>
-                                    </div>
-                                    <div class="small-post-content">
-                                        <p>
-                                            <a href="post-single.html">{{ p.description }}</a>
-                                        </p>
-                                        <small> <span class="slash"></span> {{ p.createdDate | date:'dd-MM-yyyy'
-                                            }}</small>
-
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!--Ads-->
-                        <div class="widget">
-                            <div class="widget-ads">
-                                <img src="assets/img/ads/ads2.jpg" alt="">
-                            </div>
-                        </div>
-                        <!--/-->
-                    </div>
-                </div>
-            </div>
-            <!--/-->
         </div>
     </div>
 </section>
