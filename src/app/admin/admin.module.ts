@@ -9,6 +9,7 @@ import { PostCategoryDialogComponent } from './post-category-management/post-cat
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserDialogComponent } from './user-management/user-dialog/user-dialog.component';
 import { TagManagementComponent } from './tag-management/tag-management.component';
+import { TagDialogComponent } from './tag-management/tag-dialog/tag-dialog.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TagManagementComponent } from './tag-management/tag-management.componen
         PostCategoryDialogComponent,
         UserManagementComponent,
         UserDialogComponent,
-        TagManagementComponent
+        TagManagementComponent,
+        TagDialogComponent
     ],
     imports: [
         CommonModule,

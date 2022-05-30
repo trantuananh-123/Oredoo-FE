@@ -59,7 +59,7 @@ export class UserManagementComponent implements OnInit {
             email: [null, [Validators.pattern('^[\\w._%+-]\+@[a-zA-Z]\+\\.[a-zA-Z]{2,6}\$')]],
             phone: [null],
             isActive: [null],
-            roles: [null],
+            roleId: [null],
             startDate: [null],
             endDate: [null],
         }, {
@@ -122,7 +122,7 @@ export class UserManagementComponent implements OnInit {
             email: this.userForm.value.email != '' ? this.userForm.value.email : null,
             phone: this.userForm.value.phone != '' ? this.userForm.value.phone : null,
             isActive: this.userForm.value.isActive,
-            roles: this.userForm.value.roles,
+            roleId: this.userForm.value.roleId,
             startDate: this.userForm.value.startDate,
             endDate: this.userForm.value.endDate != null ? new Date(this.userForm.value.endDate.getTime() + 86400000) : null,
         }

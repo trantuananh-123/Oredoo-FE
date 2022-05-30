@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { authProvider } from './helpers/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuardService } from './services/auth-guard.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -25,9 +26,9 @@ import { AuthGuardService } from './services/auth-guard.service';
             progressBar: true,
             progressAnimation: 'increasing',
             positionClass: 'toast-right-center',
-        })
+        }),
     ],
-    providers: [authProvider, AuthGuardService],
+    providers: [authProvider, AuthGuardService, DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

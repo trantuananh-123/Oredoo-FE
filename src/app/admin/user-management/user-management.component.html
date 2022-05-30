@@ -73,7 +73,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label for="roles" style="font-weight: bold;">User's role </label>
-                            <ng-select formControlName="roles" [searchable]="true" placeholder="Select user role"
+                            <ng-select formControlName="roleId" [searchable]="true" placeholder="Select user role"
                                 [appendTo]="'body'">
                                 <ng-option *ngFor="let role of roleList" [value]="role.id">{{ role.name
                                     }}

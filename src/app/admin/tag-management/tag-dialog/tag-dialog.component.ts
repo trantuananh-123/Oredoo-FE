@@ -1,24 +1,25 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CustomeDateValidators } from 'src/app/directive/after-date';
-import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { TagService } from 'src/app/services/tag.service';
+import { PostCategoryDialogComponent } from '../../post-category-management/post-category-dialog/post-category-dialog.component';
 
 @Component({
-    selector: 'app-post-category-dialog',
-    templateUrl: './post-category-dialog.component.html',
-    styleUrls: ['./post-category-dialog.component.scss']
+    selector: 'app-tag-dialog',
+    templateUrl: './tag-dialog.component.html',
+    styleUrls: ['./tag-dialog.component.scss']
 })
-export class PostCategoryDialogComponent implements OnInit {
+export class TagDialogComponent implements OnInit {
 
     @ViewChild('fileInput', { static: false }) myFileInput!: ElementRef;
 
     isSubmitted: boolean = false;
-    postCateForm!: FormGroup;
+    tagForm!: FormGroup;
     selectedFile!: FileList;
 
     stateList = [
@@ -32,21 +33,21 @@ export class PostCategoryDialogComponent implements OnInit {
         }
     ]
 
-    constructor(private datePipe: DatePipe, private fb: FormBuilder, private fileService: FileService, private categoryService: CategoryService, private spinner: SpinnerService, private toastr: ToastrService, public dialogRef: MatDialogRef<PostCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(private datePipe: DatePipe, private fb: FormBuilder, private fileService: FileService, private tagService: TagService, private spinner: SpinnerService, private toastr: ToastrService, public dialogRef: MatDialogRef<PostCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     }
 
     ngOnInit(): void {
         this.initForm();
         if (this.data.name === 'Edit') {
             this.data.data.createdDate = this.datePipe.transform(this.data.data.createdDate.substring(0, 10), "MM/dd/YYYY");
-            this.postCateForm.patchValue(this.data.data);
+            this.tagForm.patchValue(this.data.data);
         } else if (this.data.name === 'Delete') {
-            this.postCateForm.patchValue({ id: this.data.data.id });
+            this.tagForm.patchValue({ id: this.data.data.id });
         }
     }
 
     initForm() {
-        this.postCateForm = this.fb.group({
+        this.tagForm = this.fb.group({
             id: [''],
             name: ['', Validators.required],
             createdDate: [{ value: new Date(), disabled: this.data.data != null ? true : false }, Validators.required],
@@ -60,7 +61,7 @@ export class PostCategoryDialogComponent implements OnInit {
     }
 
     get form() {
-        return this.postCateForm.controls;
+        return this.tagForm.controls;
     }
 
     setBodyRequest() {
@@ -82,12 +83,12 @@ export class PostCategoryDialogComponent implements OnInit {
         this.isSubmitted = true;
         const body = this.setBodyRequest();
         console.log(body);
-        if (this.postCateForm.valid) {
+        if (this.tagForm.valid) {
             this.spinner.show();
             if (this.selectedFile != null) {
                 this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
                     body["image"] = data.data.imageUrl;
-                    this.categoryService.save(body).subscribe((data: any) => {
+                    this.tagService.save(body).subscribe((data: any) => {
                         console.log(data);
                         this.toastr.success('Edit category successfully', 'Success');
                         this.dialogRef.close(true);
@@ -96,7 +97,7 @@ export class PostCategoryDialogComponent implements OnInit {
                     });
                 });
             } else {
-                this.categoryService.save(body).subscribe((data: any) => {
+                this.tagService.save(body).subscribe((data: any) => {
                     console.log(data);
                     this.toastr.success('Edit category successfully', 'Success');
                     this.dialogRef.close(true);
@@ -114,10 +115,10 @@ export class PostCategoryDialogComponent implements OnInit {
 
     delete() {
         this.isSubmitted = true;
-        const body = { "id": this.postCateForm.value.id };
+        const body = { "id": this.tagForm.value.id };
         console.log(body);
         this.spinner.show();
-        this.categoryService.delete(body).subscribe((data: any) => {
+        this.tagService.delete(body).subscribe((data: any) => {
             console.log(data);
             this.toastr.success('Delete category successfully', 'Success');
             this.dialogRef.close(true);
@@ -128,4 +129,5 @@ export class PostCategoryDialogComponent implements OnInit {
             this.spinner.hide();
         }, 1500);
     }
+
 }

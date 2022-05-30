@@ -51,8 +51,8 @@ export class UserDialogComponent implements OnInit {
             avatar: [null],
             isActive: [null, Validators.required],
             type: [null],
-            roles: [null],
-            createdDate: [null]
+            createdDate: [null],
+            roles: [null]
         }, {
             validators: [
                 CustomeDateValidators.startDate('birthday'),
@@ -92,12 +92,30 @@ export class UserDialogComponent implements OnInit {
         }
     }
 
+    setBodyRequest() {
+        return {
+            id: this.form.id.value,
+            firstName: this.form.firstName.value,
+            middleName: this.form.middleName.value,
+            lastName: this.form.lastName.value,
+            username: this.form.username.value,
+            email: this.form.email.value,
+            phone: this.form.phone.value,
+            birthday: this.form.birthday.value,
+            avatar: this.form.avatar.value,
+            isActive: this.form.isActive.value,
+            type: this.form.type.value,
+            createdDate: this.form.createdDate.value,
+            roles: this.form.roles.value,
+        }
+    }
+
     edit() {
         this.spinner.show();
         this.isSubmitted = true;
-        console.log(this.userForm.value);
+        const body = this.setBodyRequest();
         if (this.userForm.valid) {
-            this.authService.upadte(this.userForm.value).subscribe((data: any) => {
+            this.authService.upadte(body).subscribe((data: any) => {
                 this.toastr.success('Updated successfully', 'Success');
                 this.dialogRef.close(true);
                 setTimeout(() => {
