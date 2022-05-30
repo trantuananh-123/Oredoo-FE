@@ -85,10 +85,10 @@
                                                             *ngIf="(form.startDate.touched || form.startDate.dirty || isSubmitted)">
                                                             <mat-error class="custom__mat-error text-left"
                                                                 *ngIf="searchForm.hasError('fromToDate')">
-                                                                Start date must smaller than End date</mat-error>
+                                                                Start date must not bigger than End date</mat-error>
                                                             <mat-error class="custom__mat-error text-left"
                                                                 *ngIf="searchForm.hasError('startDate')">
-                                                                Start date must smaller than Current date</mat-error>
+                                                                Start date not bigger than Current date</mat-error>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,7 +111,7 @@
                                                                 End date must not smaller than Start date</mat-error>
                                                             <mat-error class="custom__mat-error text-left"
                                                                 *ngIf="searchForm.hasError('endDate')">
-                                                                End date must smaller than Current date</mat-error>
+                                                                End date not bigger than Current date</mat-error>
                                                         </div>
                                                     </div>
                                                 </div>

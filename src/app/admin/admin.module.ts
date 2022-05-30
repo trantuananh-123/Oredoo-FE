@@ -6,13 +6,19 @@ import { PostManagementComponent } from './post-management/post-management.compo
 import { ShareModule } from '../share/share.module';
 import { PostCategoryManagementComponent } from './post-category-management/post-category-management.component';
 import { PostCategoryDialogComponent } from './post-category-management/post-category-dialog/post-category-dialog.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { UserDialogComponent } from './user-management/user-dialog/user-dialog.component';
+import { TagManagementComponent } from './tag-management/tag-management.component';
 
 
 @NgModule({
     declarations: [
         PostManagementComponent,
         PostCategoryManagementComponent,
-        PostCategoryDialogComponent
+        PostCategoryDialogComponent,
+        UserManagementComponent,
+        UserDialogComponent,
+        TagManagementComponent
     ],
     imports: [
         CommonModule,

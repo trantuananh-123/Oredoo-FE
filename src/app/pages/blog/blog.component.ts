@@ -61,7 +61,7 @@ export class BlogComponent implements OnInit {
 
     getAllPost() {
         this.postService.getAll().subscribe((data: any) => {
-            this.postList = data.data;
+            this.postList = data.data.filter((post: any) => post.isActive);;
         });
     }
 
@@ -96,7 +96,7 @@ export class BlogComponent implements OnInit {
 
     setBodyRequest() {
         return {
-            authorName: this.form.authorName.value != null ? this.form.authorName.value : null,
+            authorName: this.form.authorName.value != '' ? this.form.authorName.value : null,
             categoryId: this.form.categoryId.value != null ? this.form.categoryId.value : null,
             tags: this.form.tags.value != null ? this.form.tags.value : null,
             startDate: this.form.startDate.value != null ? this.form.startDate.value : null,
@@ -120,7 +120,7 @@ export class BlogComponent implements OnInit {
             if (this.searchForm.valid) {
                 this.spinner.show();
                 this.postService.search(body).subscribe((data: any) => {
-                    this.postList = data.data;
+                    this.postList = data.data.filter((post: any) => post.isActive);;
                     if (data.data.length > 0) {
                         this.scrollTop();
                     }

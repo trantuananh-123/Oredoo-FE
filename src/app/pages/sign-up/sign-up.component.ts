@@ -62,11 +62,39 @@ export class SignUpComponent implements OnInit {
             });
         } else {
             if (this.form.username.errors?.required) {
-                this.toastr.warning("Email is not valid", "Warning");
+                this.toastr.warning("Username is required", "Warning");
+            } else if (this.form.email.errors?.required) {
+                this.toastr.warning("Email is required", "Warning");
+            } else if (this.form.email.errors?.pattern) {
+                this.toastr.warning("Email is invalid", "Warning");
+            } else if (this.form.username.errors?.unique) {
+                this.toastr.warning("Username is already taken", "Warning");
+            } else if (this.form.email.errors?.unique) {
+                this.toastr.warning("Email is already taken", "Warning");
             } else {
                 this.toastr.warning('Please fill all required fields', 'Warning');
             }
         }
+    }
+
+    checkUser(evt: any) {
+        this.authService.getUserByUsername(evt.target.value).subscribe((data: any) => {
+            if (data.data == null) {
+                this.signUpForm.get('username')?.setErrors(null);
+            } else {
+                this.signUpForm.get('username')?.setErrors({ unique: true });
+            }
+        });
+    }
+
+    checkEmail(evt: any) {
+        this.authService.getUserByEmail(evt.target.value).subscribe((data: any) => {
+            if (data.data == null) {
+                this.signUpForm.get('email')?.setErrors(null);
+            } else {
+                this.signUpForm.get('email')?.setErrors({ unique: true });
+            }
+        });
     }
 
 }

@@ -58,7 +58,7 @@ export class MyPostComponent implements OnInit {
         toolbarPosition: 'top',
     }
 
-    constructor(private postService: PostService, private categoryService: CategoryService, private tagService: TagService, private authService: AuthService, private fileSerivce: FileService, private fb: FormBuilder, private userService: UserService, private toastr: ToastrService, private el: ElementRef, private spinner: SpinnerService) {
+    constructor(private postService: PostService, private categoryService: CategoryService, private tagService: TagService, private authService: AuthService, private fileService: FileService, private fb: FormBuilder, private userService: UserService, private toastr: ToastrService, private el: ElementRef, private spinner: SpinnerService) {
     }
 
     ngOnInit(): void {
@@ -78,7 +78,7 @@ export class MyPostComponent implements OnInit {
             "userId": this.userService.getUserId()
         }
         this.postService.getAllByUserId(body).subscribe((data: any) => {
-            this.postList = data.data.filter((cat: any) => cat.isActive);
+            this.postList = data.data;
         });
     }
 
@@ -130,7 +130,7 @@ export class MyPostComponent implements OnInit {
         this.isSubmitted = true;
         let body = this.setBodyRequest();
         if (this.postForm.valid) {
-            this.fileSerivce.upload(this.selectedFile[0]).subscribe((data: any) => {
+            this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
                 console.log(data.data.imageUrl);
                 body["image"] = data.data.imageUrl;
                 console.log(body);
@@ -158,6 +158,8 @@ export class MyPostComponent implements OnInit {
                 this.toastr.warning('Title is required', 'Warning');
             } else if (this.form.description.errors?.required) {
                 this.toastr.warning('Description is required', 'Warning');
+            } else if (this.form.image.errors?.required) {
+                this.toastr.warning('Post image is required', 'Warning');
             } else if (this.form.categoryId.errors?.required) {
                 this.toastr.warning('Post category is required', 'Warning');
             } else if (this.form.content.errors?.required) {

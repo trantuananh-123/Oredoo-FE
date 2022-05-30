@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from '../services/auth-guard.service';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
@@ -9,8 +8,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { MyPostComponent } from './my-post/my-post.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { SearchComponent } from './search/search.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
@@ -56,8 +54,8 @@ const routes: Routes = [
         component: SignUpComponent
     },
     {
-        path: 'search',
-        component: SearchComponent
+        path: 'profile',
+        component: ProfileComponent
     }
 ];
 

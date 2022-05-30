@@ -131,6 +131,16 @@
                                 </li>
                                 <li class="post-date"> <span class="line"></span> {{ p.createdDate | date:'dd-MM-yyyy'}}
                                 </li>
+                                <li class="ml-2">
+                                    <mat-chip-list style="display: flex; justify-content: center">
+                                        <mat-chip style="background-color: #54A254;" selected *ngIf="p.isActive">
+                                            Active
+                                        </mat-chip>
+                                        <mat-chip style="background-color: #BD362F;" selected *ngIf="!p.isActive">
+                                            Disabled
+                                        </mat-chip>
+                                    </mat-chip-list>
+                                </li>
                             </ul>
                             <h5 class="entry-title">
                                 <a [routerLink]="['/blog-detail/', p.id]">{{ p.description }}</a>

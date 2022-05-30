@@ -9,23 +9,27 @@
                     <form [formGroup]="signUpForm" class="sign-form widget-form contact_form " method="post">
                         <div class="form-group">
                             <input formControlName="username" type="text" class="form-control" placeholder="Username*"
-                                name="username"
+                                name="username" (change)="checkUser($event)"
                                 [ngClass]="{'invalid': (form.username.touched || form.username.dirty || isSubmitted) && form.username.errors}">
                             <div *ngIf="(form.username.touched || form.username.dirty || isSubmitted)">
                                 <mat-error class="custom__mat-error" *ngIf="form.username.errors?.required">
                                     Username is required</mat-error>
+                                <mat-error class="custom__mat-error" *ngIf="form.username.errors?.unique">
+                                    Username is already taken</mat-error>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <input formControlName="email" type="email" class="form-control" placeholder="Email*"
-                                name="email"
+                                name="email" (change)="checkEmail($event)"
                                 [ngClass]="{'invalid': (form.email.touched || form.email.dirty || isSubmitted) && form.email.errors}">
                             <div *ngIf="(form.email.touched || form.email.dirty || isSubmitted)">
                                 <mat-error class="custom__mat-error" *ngIf="form.email.errors?.required">
                                     Email is required</mat-error>
                                 <mat-error class="custom__mat-error" *ngIf="form.email.errors?.pattern">
                                     Invalid email</mat-error>
+                                <mat-error class="custom__mat-error" *ngIf="form.email.errors?.unique">
+                                    Email is already taken</mat-error>
                             </div>
                         </div>
 

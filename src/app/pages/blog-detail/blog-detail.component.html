@@ -6,9 +6,7 @@
                 <!--post-single-title-->
                 <div class="post-single-body">
                     <div class="post-single-title">
-                        <h2 style="font-size: 32px; font-weight: bold"> Brand is just a perception, and perception will
-                            match reality over
-                            time</h2>
+                        <h2 style="font-size: 32px; font-weight: bold"> {{ post?.title }} </h2>
                         <div class="meta-social">
                             <ul class="entry-meta">
                                 <li class="post-author-img"><img src="{{ avatar }}" alt=""></li>
@@ -18,35 +16,17 @@
                                 <li class="post-date"> <span class="line"></span> {{ post?.createdDate |
                                     date:'dd/MM/yyyy' }}</li>
                             </ul>
-                            <div class="social-media">
+                            <div class="social-media" *ngIf="post?.userId === userId || isAdmin">
                                 <ul class="list-inline">
                                     <li>
-                                        <p>Share: </p>
+                                        <button (click)="edit()" mat-raised-button color="primary" class="mr-2"
+                                            style="color: #ffffff; padding-top: 5px; padding-bottom: 5px; font-size: 16px">Edit
+                                            Post</button>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <i class="fab fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fab fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fab fa-youtube"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fab fa-pinterest"></i>
-                                        </a>
+                                        <button (click)="delete()" mat-raised-button color="warn"
+                                            style="color: #ffffff; padding-top: 5px; padding-bottom: 5px; font-size: 16px">Delete
+                                            Post</button>
                                     </li>
                                 </ul>
                             </div>
@@ -70,7 +50,7 @@
                         <div class="tags">
                             <p style="margin: 0 !important; align-self: center">Tags:</p>
                             <ul class="list-inline">
-                                <li *ngFor="let tag of post.tags">
+                                <li *ngFor="let tag of post?.tags">
                                     <a href="#">{{ tag.name }}</a>
                                 </li>
                             </ul>
@@ -112,15 +92,12 @@
                         <div class="authors-info">
                             <div class="image">
                                 <a href="author.html" class="image">
-                                    <img src="assets/img/author/1.jpg" alt="">
+                                    <img style="width: 100px" src="{{ avatar }}" alt="">
                                 </a>
                             </div>
                             <div class="content">
-                                <h4>sarah smith</h4>
-                                <p> Etiam vitae dapibus rhoncus. Eget etiam aenean nisi montes felis pretium donec veni.
-                                    Pede vidi condimentum et aenean hendrerit.
-                                    Quis sem justo nisi varius.
-                                </p>
+                                <h4>{{ post?.authorName }}</h4>
+                                <p> {{ post?.title }}</p>
                                 <div class="social-media">
                                     <ul class="list-inline">
                                         <li>
@@ -151,59 +128,6 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!--post-single-Related posts-->
-                    <div class="post-single-next-previous">
-                        <div class="row ">
-                            <!--prevvious post-->
-                            <div class="col-md-6">
-                                <div class="small-post">
-                                    <div class="small-post-image">
-                                        <a href="post-single.html">
-                                            <img src="assets/img/blog/1.jpg" alt="...">
-                                        </a>
-                                    </div>
-
-                                    <div class="small-post-content">
-                                        <small> <a href="post-single.html"> <i class="las la-arrow-left"></i>Previous
-                                                post</a></small>
-
-                                        <p>
-                                            <a href="post-single.html">You can’t build a reputation on what you are
-                                                going to do.</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/-->
-
-                            <!--next post-->
-                            <div class="col-md-6">
-                                <div class="small-post">
-                                    <div class="small-post-image">
-                                        <a href="post-single.html">
-                                            <img src="assets/img/blog/2.jpg" alt="...">
-                                        </a>
-                                    </div>
-
-                                    <div class="small-post-content">
-                                        <small> <a href="post-single.html">Next post <i
-                                                    class="las la-arrow-right"></i></a> </small>
-                                        <p>
-                                            <a href="post-single.html">Brand yourself for the career you want, not the
-                                                job you have</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/-->
-                        </div>
-                    </div>
-                    <!--post-single-Ads-->
-                    <div class="post-single-ads ">
-                        <div class="ads">
-                            <img src="assets/img/ads/ads.jpg" alt="">
                         </div>
                     </div>
 

@@ -1,46 +1,49 @@
-<!--Login-->
-<section class="login">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 col-md-8 m-auto">
-                <div class="login-content">
-                    <h4>Login</h4>
-                    <p></p>
-                    <form [formGroup]="loginForm" action="#" class="sign-form widget-form " method="post">
-                        <div class="form-group">
-                            <input formControlName="username" type="text" class="form-control" placeholder="Username*"
-                                name="username"
-                                [ngClass]="{'invalid': (form.username.touched || form.username.dirty || isSubmitted) && form.username.errors}">
-                            <div *ngIf="(form.username.touched || form.username.dirty || isSubmitted)">
-                                <mat-error class="custom__mat-error" *ngIf="form.username.errors?.required">
-                                    Username is required</mat-error>
+<div *ngIf="!isLoggedIn">
+    <!--Login-->
+    <section class="login">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 m-auto">
+                    <div class="login-content">
+                        <h4>Login</h4>
+                        <p></p>
+                        <form [formGroup]="loginForm" action="#" class="sign-form widget-form " method="post">
+                            <div class="form-group">
+                                <input formControlName="username" type="text" class="form-control"
+                                    placeholder="Username*" name="username"
+                                    [ngClass]="{'invalid': (form.username.touched || form.username.dirty || isSubmitted) && form.username.errors}">
+                                <div *ngIf="(form.username.touched || form.username.dirty || isSubmitted)">
+                                    <mat-error class="custom__mat-error" *ngIf="form.username.errors?.required">
+                                        Username is required</mat-error>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input formControlName="password" type="password" class="form-control"
-                                placeholder="Password*" name="password"
-                                [ngClass]="{'invalid': (form.password.touched || form.password.dirty || isSubmitted) && form.password.errors}">
-                            <div *ngIf="(form.password.touched || form.password.dirty || isSubmitted)">
-                                <mat-error class="custom__mat-error" *ngIf="form.password.errors?.required">
-                                    Password is required</mat-error>
+                            <div class="form-group">
+                                <input formControlName="password" type="password" class="form-control"
+                                    placeholder="Password*" name="password"
+                                    [ngClass]="{'invalid': (form.password.touched || form.password.dirty || isSubmitted) && form.password.errors}">
+                                <div *ngIf="(form.password.touched || form.password.dirty || isSubmitted)">
+                                    <mat-error class="custom__mat-error" *ngIf="form.password.errors?.required">
+                                        Password is required</mat-error>
+                                </div>
                             </div>
-                        </div>
-                        <div class="sign-controls form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                <label class="custom-control-label" for="rememberMe" style="padding-top: 3px;">Remember
-                                    Me</label>
+                            <div class="sign-controls form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                    <label class="custom-control-label" for="rememberMe"
+                                        style="padding-top: 3px;">Remember
+                                        Me</label>
+                                </div>
+                                <a href="#" class="btn-link ">Forgot Password?</a>
                             </div>
-                            <a href="#" class="btn-link ">Forgot Password?</a>
-                        </div>
-                        <div class="form-group" (click)="login()">
-                            <button type="submit" class="btn-custom">Login</button>
-                        </div>
-                        <p class="form-group text-center">Don't have an account? <a href="signup.html"
-                                class="btn-link">Create One</a> </p>
-                    </form>
+                            <div class="form-group" (click)="login()">
+                                <button type="submit" class="btn-custom">Login</button>
+                            </div>
+                            <p class="form-group text-center">Don't have an account? <a href="signup.html"
+                                    class="btn-link">Create One</a> </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

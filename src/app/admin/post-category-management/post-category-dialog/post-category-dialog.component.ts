@@ -1,8 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { CustomeDateValidators } from 'src/app/directive/after-date';
 import { CategoryService } from 'src/app/services/category.service';
+import { FileService } from 'src/app/services/file.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -12,8 +14,11 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class PostCategoryDialogComponent implements OnInit {
 
+    @ViewChild('fileInput', { static: false }) myFileInput!: ElementRef;
+
     isSubmitted: boolean = false;
     postCateForm!: FormGroup;
+    selectedFile!: FileList;
 
     stateList = [
         {
@@ -26,20 +31,27 @@ export class PostCategoryDialogComponent implements OnInit {
         }
     ]
 
-    constructor(private fb: FormBuilder, private categoryService: CategoryService, private spinner: SpinnerService, private toastr: ToastrService, public dialogRef: MatDialogRef<PostCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(private fb: FormBuilder, private fileService: FileService, private categoryService: CategoryService, private spinner: SpinnerService, private toastr: ToastrService, public dialogRef: MatDialogRef<PostCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     }
 
     ngOnInit(): void {
         this.initForm();
-        this.postCateForm.patchValue(this.data.data);
+        if (this.data.name === 'Edit') {
+            this.postCateForm.patchValue(this.data.data);
+        }
     }
 
     initForm() {
         this.postCateForm = this.fb.group({
-            id: ['', Validators.required],
+            id: [''],
             name: ['', Validators.required],
-            createdDate: [{ value: '', disabled: true }, Validators.required],
+            createdDate: [{ value: '', disabled: this.data.data != null ? true : false }, Validators.required],
             isActive: ['', Validators.required],
+            image: ['']
+        }, {
+            validators: [
+                CustomeDateValidators.startDate('createdDate'),
+            ]
         });
     }
 
@@ -53,7 +65,12 @@ export class PostCategoryDialogComponent implements OnInit {
             name: this.form.name.value,
             createdDate: this.form.createdDate.value,
             isActive: this.form.isActive.value,
+            image: this.form.image.value
         }
+    }
+
+    selectFile(event: any) {
+        this.selectedFile = event.target.files;
     }
 
     save() {
@@ -62,13 +79,26 @@ export class PostCategoryDialogComponent implements OnInit {
         console.log(body);
         if (this.postCateForm.valid) {
             this.spinner.show();
-            this.categoryService.save(body).subscribe((data: any) => {
-                console.log(data);
-                this.toastr.success('Edit category successfully', 'Success');
-                this.dialogRef.close(true);
-            }, () => {
-                this.toastr.error('Edit category failed', 'Error');
-            })
+            if (this.selectedFile != null) {
+                this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
+                    body["image"] = data.data.imageUrl;
+                    this.categoryService.save(body).subscribe((data: any) => {
+                        console.log(data);
+                        this.toastr.success('Edit category successfully', 'Success');
+                        this.dialogRef.close(true);
+                    }, () => {
+                        this.toastr.error('Edit category failed', 'Error');
+                    });
+                });
+            } else {
+                this.categoryService.save(body).subscribe((data: any) => {
+                    console.log(data);
+                    this.toastr.success('Edit category successfully', 'Success');
+                    this.dialogRef.close(true);
+                }, () => {
+                    this.toastr.error('Edit category failed', 'Error');
+                })
+            }
         } else {
             this.toastr.warning('Please check all required field', 'Warning');
         }

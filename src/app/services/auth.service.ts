@@ -18,8 +18,16 @@ export class AuthService {
         return this.http.post(`${environment.BASE_URL}/user/sign-up`, body);
     }
 
+    getAll(): Observable<any> {
+        return this.http.get(`${environment.BASE_URL}/user/get-all`);
+    }
+
     isLoggedIn(): boolean {
         return sessionStorage.getItem('token') != null;
+    }
+
+    upadte(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/user/update`, body);
     }
 
     getById(id: String): Observable<any> {
@@ -39,5 +47,21 @@ export class AuthService {
 
     getAllAuthors() {
         return this.http.get(`${environment.BASE_URL}/user/all-authors`);
+    }
+
+    getUserByUsername(username: string): Observable<any> {
+        return this.http.get(`${environment.BASE_URL}/user/unique-name/${username}`);
+    }
+
+    getUserByEmail(email: string): Observable<any> {
+        return this.http.get(`${environment.BASE_URL}/user/unique-email/${email}`);
+    }
+
+    delete(body: String): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/user/delete`, body);
+    }
+
+    search(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/user/search`, body);
     }
 }

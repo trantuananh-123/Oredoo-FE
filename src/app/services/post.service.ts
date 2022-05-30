@@ -30,6 +30,10 @@ export class PostService {
         return this.http.post(`${environment.BASE_URL}/post/save`, body);
     }
 
+    delete(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/post/delete`, body);
+    }
+
     search(body: any): Observable<any> {
         return this.http.post(`${environment.BASE_URL}/post/search`, body);
     }

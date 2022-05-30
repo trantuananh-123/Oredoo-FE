@@ -32,6 +32,21 @@ export class PostCategoryManagementComponent implements OnInit {
         });
     }
 
+    async add() {
+        const dialogRef = this.dialog.open(PostCategoryDialogComponent, {
+            data: {
+                name: "Add"
+            },
+            width: '500px',
+            height: '550px',
+        });
+        dialogRef.afterClosed().toPromise().then((result: any) => {
+            if (result) {
+                this.getAll();
+            }
+        });
+    }
+
     async edit(row: any) {
         const dialogRef = this.dialog.open(PostCategoryDialogComponent, {
             data: {
@@ -39,7 +54,7 @@ export class PostCategoryManagementComponent implements OnInit {
                 data: row
             },
             width: '500px',
-            height: '384px',
+            height: '550px',
         });
         dialogRef.afterClosed().toPromise().then((result: any) => {
             if (result) {

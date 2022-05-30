@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
     isSubmitted: boolean = false;
 
     loginForm!: FormGroup;
+    isLoggedIn: boolean = false;
 
-    constructor(private authService: AuthService, private tokenService: TokenStorageService, private userService: UserService, private globalService: GlobalService, private fb: FormBuilder, private router: Router, private toastr: ToastrService, private spinner: SpinnerService) { }
+    constructor(private authService: AuthService, private tokenService: TokenStorageService, private userService: UserService, private globalService: GlobalService, private fb: FormBuilder, private router: Router, private toastr: ToastrService, private spinner: SpinnerService) {
+        this.isLoggedIn = this.authService.isLoggedIn();
+    }
 
     ngOnInit(): void {
         this.initForm();

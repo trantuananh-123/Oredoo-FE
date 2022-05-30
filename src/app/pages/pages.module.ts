@@ -12,10 +12,11 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { SearchComponent } from './search/search.component';
 import { MyPostComponent } from './my-post/my-post.component';
 import { HtmlPipe } from '../pipe/html-pipe';
 import { TruncatePipe } from '../pipe/truncate-pipe';
+import { BlogDetailDialogComponent } from './blog-detail/blog-detail-dialog/blog-detail-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -29,10 +30,11 @@ import { TruncatePipe } from '../pipe/truncate-pipe';
         AboutUsComponent,
         BlogComponent,
         BlogDetailComponent,
-        SearchComponent,
         MyPostComponent,
         HtmlPipe,
-        TruncatePipe
+        TruncatePipe,
+        BlogDetailDialogComponent,
+        ProfileComponent
     ],
     imports: [
         CommonModule,

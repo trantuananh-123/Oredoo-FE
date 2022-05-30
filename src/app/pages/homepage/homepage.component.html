@@ -47,7 +47,7 @@
                     <div class="categories-items">
                         <a class="category-item" href="#" *ngFor="let cat of categoryList; let i = index">
                             <div class="image">
-                                <img src="assets/img/categories/1.jpg" alt="">
+                                <img src="{{ cat.image }}" alt="">
                             </div>
                             <p> {{ cat.name }} <span>{{ i + 1 }}</span> </p>
                         </a>

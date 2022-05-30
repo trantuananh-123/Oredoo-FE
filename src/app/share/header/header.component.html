@@ -50,10 +50,7 @@
                                             management </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="shop-single.html">author management </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="cart.html">user management </a>
+                                        <a class="dropdown-item" routerLink="admin/user-management">user management </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="checkout.html">Tag management </a>
@@ -77,7 +74,7 @@
                     </mat-card-header>
                 </mat-card>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item style="font-weight: bold">Profile</button>
+                    <button mat-menu-item style="font-weight: bold" routerLink="/profile">Profile</button>
                     <button mat-menu-item style="font-weight: bold" (click)="logOut()">Log out</button>
                 </mat-menu>
                 <span *ngIf="username" style="margin-left: 10px; color: #000000; align-self: center;">{{
