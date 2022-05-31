@@ -66,7 +66,7 @@
                         <div *ngIf="(form.email.touched || form.email.dirty || isSubmitted)">
                             <mat-error class="custom__mat-error" *ngIf="form.email.errors?.required">
                                 Email is required</mat-error>
-                            <mat-error class="custom__mat-error" *ngIf="form.email.errors?.pattern">
+                            <mat-error class="custom__mat-error" *ngIf="form.email.errors?.email">
                                 Invalid email</mat-error>
                             <mat-error class="custom__mat-error" *ngIf="form.email.errors?.unique">
                                 Email is already taken</mat-error>

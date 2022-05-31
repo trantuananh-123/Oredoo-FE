@@ -56,7 +56,7 @@ export class UserManagementComponent implements OnInit {
     initForm() {
         this.userForm = this.fb.group({
             username: [null],
-            email: [null, [Validators.pattern('^[\\w._%+-]\+@[a-zA-Z]\+\\.[a-zA-Z]{2,6}\$')]],
+            email: [null, [Validators.email]],
             phone: [null],
             isActive: [null],
             roleId: [null],
@@ -144,7 +144,7 @@ export class UserManagementComponent implements OnInit {
                 }, 1000);
             });
         } else {
-            if (this.form.email.errors?.pattern) {
+            if (this.form.email.errors?.email) {
                 this.toastr.error('Email is not valid', 'Error');
             }
             setTimeout(() => {

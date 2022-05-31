@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { MyPostComponent } from './my-post/my-post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ForgotComponent } from './forgot/forgot.component';
 
 const routes: Routes = [
     {
@@ -44,6 +45,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotComponent,
     },
     {
         path: 'my-post',

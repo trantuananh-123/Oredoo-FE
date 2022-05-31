@@ -17,6 +17,7 @@ import { HtmlPipe } from '../pipe/html-pipe';
 import { TruncatePipe } from '../pipe/truncate-pipe';
 import { BlogDetailDialogComponent } from './blog-detail/blog-detail-dialog/blog-detail-dialog.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForgotComponent } from './forgot/forgot.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ProfileComponent } from './profile/profile.component';
         HtmlPipe,
         TruncatePipe,
         BlogDetailDialogComponent,
-        ProfileComponent
+        ProfileComponent,
+        ForgotComponent
     ],
     imports: [
         CommonModule,

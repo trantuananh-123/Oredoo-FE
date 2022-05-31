@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
             middleName: [null],
             lastName: [null],
             username: [null, Validators.required],
-            email: [null, [Validators.required, Validators.pattern('^[\\w._%+-]\+@[a-zA-Z]\+\\.[a-zA-Z]{2,6}\$')]],
+            email: [null, [Validators.required, Validators.email]],
             phone: [null],
             birthday: [null],
             avatar: [null],

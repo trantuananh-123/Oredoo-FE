@@ -35,7 +35,7 @@
                             <input formControlName="email" type="email" class="form-control" placeholder="Email"
                                 name="email" maxlength="255">
                             <div *ngIf="(form.email.touched || form.email.dirty || isSubmitted)">
-                                <mat-error class="custom__mat-error" *ngIf="form.email.errors?.pattern">
+                                <mat-error class="custom__mat-error" *ngIf="form.email.errors?.email">
                                     Invalid email</mat-error>
                             </div>
                         </div>
@@ -47,14 +47,6 @@
                             <label for="phone" style="font-weight: bold;">Phone </label>
                             <input formControlName="phone" type="text" class="form-control" placeholder="Phone"
                                 name="phone" maxlength="11">
-                            <!-- <div *ngIf="(form.email.touched || form.email.dirty || isSubmitted)">
-                                    <mat-error class="custom__mat-error" *ngIf="form.email.errors?.required">
-                                        Email is required</mat-error>
-                                    <mat-error class="custom__mat-error" *ngIf="form.email.errors?.pattern">
-                                        Invalid email</mat-error>
-                                    <mat-error class="custom__mat-error" *ngIf="form.email.errors?.unique">
-                                        Email is already taken</mat-error>
-                                </div> -->
                         </div>
                     </div>
                     <div class="col-lg-6">

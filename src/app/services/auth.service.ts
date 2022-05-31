@@ -64,4 +64,8 @@ export class AuthService {
     search(body: any): Observable<any> {
         return this.http.post(`${environment.BASE_URL}/user/search`, body);
     }
+
+    forgotPassword(body: any): Observable<any> {
+        return this.http.post(`${environment.BASE_URL}/user/forgot-password`, body);
+    }
 }

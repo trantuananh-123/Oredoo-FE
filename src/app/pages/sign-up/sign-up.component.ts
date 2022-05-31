@@ -31,8 +31,8 @@ export class SignUpComponent implements OnInit {
     initForm() {
         this.signUpForm = this.fb.group({
             username: [null, Validators.required],
-            email: [null, [Validators.required, Validators.pattern('^[\\w._%+-]\+@[a-zA-Z]\+\\.[a-zA-Z]{2,6}\$')]],
-            password: [null, Validators.required],
+            email: [null, [Validators.required, Validators.email]],
+            password: [null, [Validators.required, Validators.minLength(6)]],
         });
     }
 
@@ -70,12 +70,14 @@ export class SignUpComponent implements OnInit {
                 this.toastr.warning("Username is required", "Warning");
             } else if (this.form.email.errors?.required) {
                 this.toastr.warning("Email is required", "Warning");
-            } else if (this.form.email.errors?.pattern) {
+            } else if (this.form.email.errors?.email) {
                 this.toastr.warning("Email is invalid", "Warning");
             } else if (this.form.username.errors?.unique) {
                 this.toastr.warning("Username is already taken", "Warning");
             } else if (this.form.email.errors?.unique) {
                 this.toastr.warning("Email is already taken", "Warning");
+            } else if (this.form.password.errors?.minLength) {
+                this.toastr.warning("Password must longer than 6 characters", "Warning");
             } else {
                 this.toastr.warning('Please fill all required fields', 'Warning');
             }
