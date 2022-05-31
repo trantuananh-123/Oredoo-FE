@@ -21,10 +21,11 @@
                                 <input formControlName="email" type="email" class="form-control" placeholder="Email*"
                                     name="email"
                                     [ngClass]="{'invalid': (form.email.touched || form.email.dirty || isSubmitted) && form.email.errors}">
-                                <div *ngIf="(form.email.touched || form.email.dirty || isSubmitted)">
-                                    <mat-error class="custom__mat-error" *ngIf="form.email.errors?.required">
-                                        Email is required</mat-error>
-                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="phone" type="text" class="form-control" placeholder="Phone*"
+                                    name="email"
+                                    [ngClass]="{'invalid': (form.phone.touched || form.phone.dirty || isSubmitted) && form.phone.errors}">
                             </div>
                             <div class="form-group" (click)="reset()">
                                 <button type="submit" class="btn-custom">Reset password</button>

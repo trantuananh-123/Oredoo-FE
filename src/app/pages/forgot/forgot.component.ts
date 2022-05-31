@@ -33,7 +33,8 @@ export class ForgotComponent implements OnInit {
     initForm() {
         this.forgotForm = this.fb.group({
             username: [null, Validators.required],
-            email: [null, [Validators.required, Validators.email]],
+            email: [null, Validators.email],
+            phone: [null],
         });
     }
 
@@ -45,6 +46,8 @@ export class ForgotComponent implements OnInit {
         return {
             username: this.forgotForm.value.username != null ? this.forgotForm.value.username : null,
             email: this.forgotForm.value.email != null ? this.forgotForm.value.email : null,
+            phone: this.forgotForm.value.phone != null ? this.forgotForm.value.phone : null,
+            sendingType: this.forgotForm.value.phone != null ? 2 : 1,
         }
     }
 
@@ -52,7 +55,11 @@ export class ForgotComponent implements OnInit {
         this.isSubmitted = true;
         this.spinner.show();
         const body = this.setBodyRequest();
-        if (this.forgotForm.valid) {
+        console.log(body);
+        if ((body.email != null || body.email == '') && (body.phone != null || body.phone == '')) {
+            this.toastr.warning('Please enter either email or phone number');
+            this.spinner.hide();
+        } else if (this.forgotForm.valid && (body.sendingType == 1 || 2)) {
             this.authService.forgotPassword(body).subscribe((data: any) => {
                 this.toastr.success('Please check your email to reset your password', 'Success');
                 this.router.navigateByUrl('/login');
