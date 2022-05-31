@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        return sessionStorage.getItem('token') != null;
+        return window.sessionStorage.getItem('token') != null || window.localStorage.getItem('token') != null;
     }
 
     upadte(body: any): Observable<any> {
@@ -39,7 +39,7 @@ export class AuthService {
     }
 
     isAdmin() {
-        let userRoles = sessionStorage.getItem('user_role')!;
+        let userRoles = window.sessionStorage.getItem('user_role') != null ? window.sessionStorage.getItem('user_role') : window.localStorage.getItem('user_role');
         if (userRoles != null && userRoles.includes('ROLE_ADMIN')) {
             return true;
         } else return false;

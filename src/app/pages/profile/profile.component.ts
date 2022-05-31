@@ -45,7 +45,11 @@ export class ProfileComponent implements OnInit {
             email: [null, [Validators.required, Validators.pattern('^[\\w._%+-]\+@[a-zA-Z]\+\\.[a-zA-Z]{2,6}\$')]],
             phone: [null],
             birthday: [null],
-            avatar: [null]
+            avatar: [null],
+            isActive: [null],
+            type: [null],
+            createdDate: [null],
+            roles: [null]
         }, {
             validators: [
                 CustomeDateValidators.startDate('birthday'),
@@ -54,10 +58,9 @@ export class ProfileComponent implements OnInit {
     }
 
     getUser() {
-        this.authService.getById(this.userService.getUserId()).subscribe((data: any) => {
+        this.authService.getById(this.userService.getUserId()!).subscribe((data: any) => {
             this.user = data.data;
             this.userForm.patchValue(data.data);
-            console.log(data.data);
         });
     }
 
@@ -71,6 +74,7 @@ export class ProfileComponent implements OnInit {
 
     upload() {
         this.spinner.show();
+        this.userForm.patchValue(this.user);
         if (this.selectedFile != null) {
             this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
                 this.userForm.patchValue({
@@ -79,7 +83,6 @@ export class ProfileComponent implements OnInit {
                 this.globalService.setAvatar(data.data.imageUrl ? data.data.imageUrl : '../../../assets/img/default_avatar.png');
                 this.toastr.success('Uploaded successfully', 'Success');
                 this.authService.upadte(this.userForm.value).subscribe((data: any) => {
-                    console.log(data);
                     this.getUser();
                     setTimeout(() => {
                         this.spinner.hide();

@@ -99,3 +99,14 @@
         <button mat-flat-button color="warn" mat-dialog-close>Cancel</button>
     </mat-dialog-actions>
 </div>
+
+<div *ngIf="data.name === 'Delete comment' ">
+    <h1 mat-dialog-title style="font-weight: bold">{{ data.name }}</h1>
+    <mat-dialog-content class="mat-typography">
+        <p style="font-size: 16px;">Are you sure want to delete this comment?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-flat-button color="primary" (click)="deleteComment()">Delete</button>
+        <button mat-flat-button color="warn" mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+</div>

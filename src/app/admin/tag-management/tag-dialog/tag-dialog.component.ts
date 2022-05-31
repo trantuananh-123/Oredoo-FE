@@ -82,14 +82,12 @@ export class TagDialogComponent implements OnInit {
     save() {
         this.isSubmitted = true;
         const body = this.setBodyRequest();
-        console.log(body);
         if (this.tagForm.valid) {
             this.spinner.show();
             if (this.selectedFile != null) {
                 this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
                     body["image"] = data.data.imageUrl;
                     this.tagService.save(body).subscribe((data: any) => {
-                        console.log(data);
                         this.toastr.success('Edit category successfully', 'Success');
                         this.dialogRef.close(true);
                     }, () => {
@@ -98,7 +96,6 @@ export class TagDialogComponent implements OnInit {
                 });
             } else {
                 this.tagService.save(body).subscribe((data: any) => {
-                    console.log(data);
                     this.toastr.success('Edit category successfully', 'Success');
                     this.dialogRef.close(true);
                 }, () => {
@@ -116,10 +113,8 @@ export class TagDialogComponent implements OnInit {
     delete() {
         this.isSubmitted = true;
         const body = { "id": this.tagForm.value.id };
-        console.log(body);
         this.spinner.show();
         this.tagService.delete(body).subscribe((data: any) => {
-            console.log(data);
             this.toastr.success('Delete category successfully', 'Success');
             this.dialogRef.close(true);
         }, () => {

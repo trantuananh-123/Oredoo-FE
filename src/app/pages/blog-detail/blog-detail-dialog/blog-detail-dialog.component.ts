@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/services/category.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { FileService } from 'src/app/services/file.service';
 import { PostService } from 'src/app/services/post.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -17,7 +18,7 @@ import { TagService } from 'src/app/services/tag.service';
 })
 export class BlogDetailDialogComponent implements OnInit {
 
-    constructor(private spinner: SpinnerService, private fileService: FileService, private fb: FormBuilder, private categoryService: CategoryService, private tagService: TagService, private postService: PostService, private toastr: ToastrService, private router: Router, public dialogRef: MatDialogRef<BlogDetailDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+    constructor(private commentService: CommentService, private spinner: SpinnerService, private fileService: FileService, private fb: FormBuilder, private categoryService: CategoryService, private tagService: TagService, private postService: PostService, private toastr: ToastrService, private router: Router, public dialogRef: MatDialogRef<BlogDetailDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     isSubmitted: boolean = false;
 
@@ -123,12 +124,10 @@ export class BlogDetailDialogComponent implements OnInit {
 
     delete() {
         const body = this.data.data;
-        console.log(body);
         this.postService.delete(body).subscribe((data: any) => {
             this.toastr.success('Delete successfully', 'Success');
             this.dialogRef.close(true);
             this.router.navigateByUrl('/my-post');
-            console.log(data);
         })
     }
 
@@ -155,9 +154,7 @@ export class BlogDetailDialogComponent implements OnInit {
             this.isSubmitted = true;
             if (this.selectedFile != null) {
                 this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
-                    console.log(data.data.imageUrl);
                     body["image"] = data.data.imageUrl;
-                    console.log(body);
                     this.postService.save(body).subscribe((data: any) => {
                         this.isSubmitted = false;
                         this.postForm.reset();
@@ -200,6 +197,13 @@ export class BlogDetailDialogComponent implements OnInit {
                 this.toastr.warning('Content is required', 'Warning');
             }
         }
+    }
+
+    deleteComment() {
+        this.commentService.delete(this.data.data).subscribe((data: any) => {
+            this.toastr.success('Delete successfully', 'Success');
+            this.dialogRef.close(true);
+        })
     }
 
 }

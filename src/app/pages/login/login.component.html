@@ -28,7 +28,8 @@
                             </div>
                             <div class="sign-controls form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                    <input (change)="rememberMe($event)" type="checkbox" class="custom-control-input"
+                                        id="rememberMe">
                                     <label class="custom-control-label" for="rememberMe"
                                         style="padding-top: 3px;">Remember
                                         Me</label>
@@ -38,7 +39,7 @@
                             <div class="form-group" (click)="login()">
                                 <button type="submit" class="btn-custom">Login</button>
                             </div>
-                            <p class="form-group text-center">Don't have an account? <a href="signup.html"
+                            <p class="form-group text-center">Don't have an account? <a routerLink="/sign-up"
                                     class="btn-link">Create One</a> </p>
                         </form>
                     </div>

@@ -81,14 +81,12 @@ export class PostCategoryDialogComponent implements OnInit {
     save() {
         this.isSubmitted = true;
         const body = this.setBodyRequest();
-        console.log(body);
         if (this.postCateForm.valid) {
             this.spinner.show();
             if (this.selectedFile != null) {
                 this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
                     body["image"] = data.data.imageUrl;
                     this.categoryService.save(body).subscribe((data: any) => {
-                        console.log(data);
                         this.toastr.success('Edit category successfully', 'Success');
                         this.dialogRef.close(true);
                     }, () => {
@@ -97,7 +95,6 @@ export class PostCategoryDialogComponent implements OnInit {
                 });
             } else {
                 this.categoryService.save(body).subscribe((data: any) => {
-                    console.log(data);
                     this.toastr.success('Edit category successfully', 'Success');
                     this.dialogRef.close(true);
                 }, () => {
@@ -115,10 +112,8 @@ export class PostCategoryDialogComponent implements OnInit {
     delete() {
         this.isSubmitted = true;
         const body = { "id": this.postCateForm.value.id };
-        console.log(body);
         this.spinner.show();
         this.categoryService.delete(body).subscribe((data: any) => {
-            console.log(data);
             this.toastr.success('Delete category successfully', 'Success');
             this.dialogRef.close(true);
         }, () => {

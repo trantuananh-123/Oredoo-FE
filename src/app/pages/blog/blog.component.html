@@ -147,11 +147,12 @@
                         *ngFor="let p of postList | paginate: { itemsPerPage: 10, currentPage: page}">
                         <div class="post-list-content">
                             <h4 class="entry-title">
-                                <a [routerLink]="['/blog-detail/', p.id]">{{ p.title }} </a>
+                                <a [routerLink]="['/blog-detail', p.id]">{{ p.title }} </a>
                             </h4>
                             <ul class="entry-meta">
                                 <li class="post-author-img"><img src="{{ p.image }}" alt=""></li>
-                                <li class="post-author"> <a href="author.html">{{ p.authorName }}</a></li>
+                                <li class="post-author"> <a [routerLink]="['/blog-detail', p.id]">{{ p.authorName }}</a>
+                                </li>
                                 <li class="entry-cat" *ngFor="let cat of categoryList"><a
                                         [routerLink]="['/blog-detail', p.id]" class="category-style-1"
                                         *ngIf="p.categoryId == cat.id"> <span class="line"></span>{{ cat.name }}</a>

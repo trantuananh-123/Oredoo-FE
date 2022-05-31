@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
     loginForm!: FormGroup;
     isLoggedIn: boolean = false;
+    isrememberMe: boolean = false;
 
     constructor(private authService: AuthService, private tokenService: TokenStorageService, private userService: UserService, private globalService: GlobalService, private fb: FormBuilder, private router: Router, private toastr: ToastrService, private spinner: SpinnerService) {
         this.isLoggedIn = this.authService.isLoggedIn();
@@ -26,6 +27,9 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
+        if (this.isLoggedIn) {
+            this.router.navigateByUrl('/');
+        }
     }
 
     initForm() {
@@ -52,10 +56,10 @@ export class LoginComponent implements OnInit {
         const body = this.setBodyRequest();
         if (this.loginForm.valid) {
             this.authService.login(body).subscribe((data: any) => {
-                this.tokenService.saveToken(data.data.token);
-                this.userService.saveUserName(data.data.username);
-                this.userService.saveUserId(data.data.id);
-                this.userService.saveUserRole(data.data.roles);
+                this.tokenService.saveToken(data.data.token, this.isrememberMe);
+                this.userService.saveUserName(data.data.username, this.isrememberMe);
+                this.userService.saveUserId(data.data.id, this.isrememberMe);
+                this.userService.saveUserRole(data.data.roles, this.isrememberMe);
                 this.toastr.success('Login successfully', 'Success');
                 setTimeout(() => {
                     this.globalService.setUsername(data.data.username);
@@ -66,6 +70,9 @@ export class LoginComponent implements OnInit {
                 }, 1000);
             }, (error: any) => {
                 this.toastr.error(error.error.message, 'Error');
+                setTimeout(() => {
+                    this.spinner.hide();
+                }, 1000)
             });
         } else {
             if (this.form.username.errors?.required || this.form.password.errors?.required) {
@@ -74,6 +81,10 @@ export class LoginComponent implements OnInit {
                 this.toastr.error('Incorrect username or password', 'Error');
             }
         }
+    }
+
+    rememberMe(event: any) {
+        this.isrememberMe = event.target.checked;
     }
 
 }

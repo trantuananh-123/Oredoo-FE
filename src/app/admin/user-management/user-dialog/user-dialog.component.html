@@ -10,8 +10,9 @@
 </div>
 
 <div *ngIf="data.name === 'Edit'">
-    <h1 mat-dialog-title style="font-weight: bold">{{ data.name }} {{ data.data?.name != null ? data.data?.name : 'new
-        Category'
+    <h1 mat-dialog-title style="font-weight: bold">{{ data.name }} {{ data.data?.username != null ? data.data?.username
+        : 'new
+        User'
         }}</h1>
     <mat-dialog-content class="mat-typography">
         <form [formGroup]="userForm" action="#" class="sign-form widget-form mb-3" method="post">

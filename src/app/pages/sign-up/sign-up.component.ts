@@ -15,11 +15,17 @@ export class SignUpComponent implements OnInit {
     isAgreed: boolean = false;
 
     signUpForm!: FormGroup;
+    isLoggedIn: boolean = false;
 
-    constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) { }
+    constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
+        this.isLoggedIn = this.authService.isLoggedIn();
+    }
 
     ngOnInit(): void {
         this.initForm();
+        if (this.isLoggedIn) {
+            this.router.navigateByUrl('/');
+        }
     }
 
     initForm() {
@@ -52,7 +58,6 @@ export class SignUpComponent implements OnInit {
         const body = this.setBodyRequest();
         if (this.signUpForm.valid) {
             this.authService.signUp(body).subscribe((data: any) => {
-                console.log(data);
                 this.toastr.success('Sign up successfully', 'Success');
                 setTimeout(() => {
                     this.router.navigateByUrl('/login');

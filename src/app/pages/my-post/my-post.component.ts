@@ -131,9 +131,7 @@ export class MyPostComponent implements OnInit {
         let body = this.setBodyRequest();
         if (this.postForm.valid) {
             this.fileService.upload(this.selectedFile[0]).subscribe((data: any) => {
-                console.log(data.data.imageUrl);
                 body["image"] = data.data.imageUrl;
-                console.log(body);
                 this.postService.save(body).subscribe((data: any) => {
                     this.getAllPost();
                     this.isSubmitted = false;
@@ -150,6 +148,9 @@ export class MyPostComponent implements OnInit {
                 });
             }, (error: any) => {
                 this.toastr.error(error.error.message, 'Error');
+                setTimeout(() => {
+                    this.spinner.hide();
+                }, 1000);
             });
         }
         else {
@@ -165,6 +166,9 @@ export class MyPostComponent implements OnInit {
             } else if (this.form.content.errors?.required) {
                 this.toastr.warning('Content is required', 'Warning');
             }
+            setTimeout(() => {
+                this.spinner.hide();
+            }, 1000);
         }
     }
 

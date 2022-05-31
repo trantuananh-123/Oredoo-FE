@@ -46,8 +46,8 @@
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="rememberMe"
                                     (change)="agree($event)">
-                                <label class="custom-control-label" for="rememberMe">Agree to our <a href="#"
-                                        class="btn-link">terms & conditions</a> </label>
+                                <label class="custom-control-label" for="rememberMe">Agree to our <a
+                                        href="javascript:void(0)" class="btn-link">terms & conditions</a> </label>
                             </div>
                         </div>
                         <div class="form-group" (click)="signUp()">
@@ -55,7 +55,7 @@
                                 [ngClass]="{'btn-custom-invalid': !isAgreed}">Sign
                                 Up</button>
                         </div>
-                        <p class="form-group text-center">Already have an account? <a href="login.html"
+                        <p class="form-group text-center">Already have an account? <a routerLink="/login"
                                 class="btn-link">Login</a> </p>
                     </form>
                     <!--/-->

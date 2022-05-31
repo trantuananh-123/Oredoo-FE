@@ -27,7 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(authReq).pipe(
             catchError(
                 (err: any) => {
-                    console.log(err);
                     if (err.status === 401) {
                         if (req.url.includes('/api/login')) {
                             this.toastr.error('Incorrect username or password', 'Error');

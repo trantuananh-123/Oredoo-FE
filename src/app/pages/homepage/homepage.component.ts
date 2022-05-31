@@ -81,7 +81,6 @@ export class HomepageComponent implements OnInit {
 
     getAllTag() {
         this.tagService.getAll().subscribe((data: any) => {
-            console.log(data);
             this.tagList = data.data.filter((tag: any) => tag.isActive);
         });
     }

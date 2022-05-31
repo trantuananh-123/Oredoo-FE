@@ -107,7 +107,6 @@ export class BlogComponent implements OnInit {
     search() {
         this.isSubmitted = true;
         const body = this.setBodyRequest();
-        console.log(body);
         if (this.isAllNull()) {
             this.spinner.show();
             this.getAllPost();

@@ -100,7 +100,6 @@ export class UserManagementComponent implements OnInit {
     }
 
     async edit(row: any) {
-        console.log(row);
         const dialogRef = this.dialog.open(UserDialogComponent, {
             data: {
                 name: "Edit",
@@ -133,7 +132,6 @@ export class UserManagementComponent implements OnInit {
         const body = this.setBodyRequest();
         if (this.userForm.valid) {
             this.authService.search(body).subscribe((data: any) => {
-                console.log(data.data);
                 this.dataSource = data.data.sort((a: any, b: any) => {
                     return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
                 });

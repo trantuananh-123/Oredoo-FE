@@ -61,11 +61,7 @@ export class UserDialogComponent implements OnInit {
     }
 
     getUser() {
-        // this.authService.getById(this.data.data.id).subscribe((data: any) => {
-        //     this.user = data.data;
         this.userForm.patchValue(this.data.data);
-        // console.log(data.data);
-        // });
     }
 
     get form() {
@@ -133,7 +129,6 @@ export class UserDialogComponent implements OnInit {
     checkUser(evt: any) {
         if (evt.target.value != this.data.data.username) {
             this.authService.getUserByUsername(evt.target.value).subscribe((data: any) => {
-                console.log(data.data);
                 if (data.data == null) {
                     this.userForm.get('username')?.setErrors(null);
                 } else {
@@ -146,7 +141,6 @@ export class UserDialogComponent implements OnInit {
     checkEmail(evt: any) {
         if (evt.target.value != this.data.data.email) {
             this.authService.getUserByEmail(evt.target.value).subscribe((data: any) => {
-                console.log(data.data);
                 if (data.data == null) {
                     this.userForm.get('email')?.setErrors(null);
                 } else {
