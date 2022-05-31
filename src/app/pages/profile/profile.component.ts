@@ -49,7 +49,8 @@ export class ProfileComponent implements OnInit {
             isActive: [null],
             type: [null],
             createdDate: [null],
-            roles: [null]
+            roles: [null],
+            password: [null]
         }, {
             validators: [
                 CustomeDateValidators.startDate('birthday'),
@@ -61,6 +62,7 @@ export class ProfileComponent implements OnInit {
         this.authService.getById(this.userService.getUserId()!).subscribe((data: any) => {
             this.user = data.data;
             this.userForm.patchValue(data.data);
+            this.userForm.patchValue({ password: null });
         });
     }
 
@@ -87,7 +89,17 @@ export class ProfileComponent implements OnInit {
                     setTimeout(() => {
                         this.spinner.hide();
                     }, 1000);
+                }, () => {
+                    this.toastr.error('Something went wrong', 'Error');
+                    setTimeout(() => {
+                        this.spinner.hide();
+                    }, 1000);
                 });
+            }, () => {
+                this.toastr.error('Upload failed', 'Error');
+                setTimeout(() => {
+                    this.spinner.hide();
+                }, 1000);
             });
         } else {
             this.toastr.warning('Please select file', 'Warning');
@@ -104,9 +116,17 @@ export class ProfileComponent implements OnInit {
                 setTimeout(() => {
                     this.spinner.hide();
                 }, 1000);
+            }, () => {
+                this.toastr.error('Upload failed', 'Error');
+                setTimeout(() => {
+                    this.spinner.hide();
+                }, 1000);
             });
         } else {
             this.toastr.warning('Please check your information', 'Warning');
+            setTimeout(() => {
+                this.spinner.hide();
+            }, 1000);
         }
     }
 
