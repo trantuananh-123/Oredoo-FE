@@ -18,7 +18,9 @@ export class HeaderComponent implements OnInit {
 
     constructor(private userService: UserService, private authService: AuthService, private globalService: GlobalService, private router: Router) {
         this.globalService.setUsername(this.userService.getUserName());
-        this.globalService.setIsAdmin(this.authService.isAdmin());
+        this.authService.checkAdmin(this.userService.getUserId()!).subscribe((data: any) => {
+            this.globalService.setIsAdmin(data.data);
+        });
         if (this.userService.getUserId() != null) {
             this.authService.getById(this.userService.getUserId()!).subscribe((data: any) => {
                 this.globalService.avatar.next(data.data.avatar);
@@ -32,7 +34,8 @@ export class HeaderComponent implements OnInit {
         });
         this.globalService.isAdmin.subscribe(isAdmin => {
             this.isAdmin = isAdmin;
-        }); this.globalService.avatar.subscribe(avatar => {
+        });
+        this.globalService.avatar.subscribe(avatar => {
             this.avatar = avatar;
         });
     }

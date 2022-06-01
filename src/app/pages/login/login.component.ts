@@ -51,11 +51,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.spinner.show();
         this.isSubmitted = true;
         const body = this.setBodyRequest();
         if (this.loginForm.valid) {
             this.authService.login(body).subscribe((data: any) => {
+                this.spinner.show();
                 this.tokenService.saveToken(data.data.token, this.isrememberMe);
                 this.userService.saveUserName(data.data.username, this.isrememberMe);
                 this.userService.saveUserId(data.data.id, this.isrememberMe);
@@ -64,7 +64,9 @@ export class LoginComponent implements OnInit {
                 setTimeout(() => {
                     this.globalService.setUsername(data.data.username);
                     this.globalService.setAvatar(data.data.avatar ? data.data.avatar : '../../../assets/img/default_avatar.png');
-                    this.globalService.setIsAdmin(this.authService.isAdmin());
+                    this.authService.checkAdmin(data.data.id).subscribe((data: any) => {
+                        this.globalService.setIsAdmin(data.data);
+                    });
                     this.router.navigateByUrl('/home');
                     this.spinner.hide();
                 }, 1000);
